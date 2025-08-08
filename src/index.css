@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-40%);
+    }
+  }
+
+  .animate-marquee {
+    will-change: transform;
+    animation: scroll-left linear infinite;
+  }
+}
