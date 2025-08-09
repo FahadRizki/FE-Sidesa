@@ -7,7 +7,7 @@ import LoadingState from "../../../components/status/LoadingState";
 import ComplaintCard from "../components/CardStatus";
 import { NoDataState, NoFilterResultsState } from "../../../components/status/EmptyState"
 import { Bell } from "lucide-react";
-import { all } from "axios";
+
 const ComplaintStatusList = () => {
   const { complaints, complaintTypes, loading, error, refetch } = useComplaintData();
   const { filters, filteredComplaints, updateFilter } = useFilters(complaints);

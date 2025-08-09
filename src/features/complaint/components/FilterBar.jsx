@@ -17,9 +17,9 @@ const FilterBar = ({ filters, onFilterChange, complaintTypes }) => (
         >
           <option value="">Semua Status</option>
           <option value="pending">Menunggu</option>
-          <option value="processing">Ditinjau</option>
-          <option value="completed">Selesai</option>
-          <option value="rejected">Ditolak</option>
+          <option value="ditinjau">Ditinjau</option>
+          <option value="disetujui">Selesai</option>
+          <option value="ditolak">Ditolak</option>
         </select>
       </div>
       
