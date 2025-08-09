@@ -80,8 +80,19 @@ const TYPE_CONFIG = {
 
 
 export const getStatusConfig = (status) => {
-  const normalizedStatus = status?.toLowerCase() || "pending";
-  return STATUS_CONFIG[normalizedStatus] || STATUS_CONFIG.pending;
+  const normalizedStatus = status?.toLowerCase().trim();
+
+  // Mapping alias status API → key STATUS_CONFIG
+  const aliasMap = {
+    disetujui: "completed",
+    ditolak: "rejected",
+    pending: "pending",
+    ditinjau: "review",
+    diproses: "processing"
+  };
+
+  const key = aliasMap[normalizedStatus] || "pending";
+  return STATUS_CONFIG[key] || STATUS_CONFIG.pending;
 };
 
 export const getTypeConfig = (type) => {
