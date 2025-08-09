@@ -31,11 +31,8 @@ export default function LetterStatusList() {
   // Data fetching
   const { allStatuses, letterTypes, error, loading, refetch } = useLetterStatus(token)
   
-  // Pastikan allStatuses selalu array untuk menghindari error
-  const safeAllStatuses = allStatuses || []
-  
   // Filtering and pagination
-  const filteredStatuses = useFiltering(safeAllStatuses, statusFilter, typeFilter)
+  const filteredStatuses = useFiltering(allStatuses, statusFilter, typeFilter)
   const { currentPageStatuses, totalPages } = usePagination(filteredStatuses, currentPage)
   
   // Reset page when filters change
@@ -99,17 +96,14 @@ export default function LetterStatusList() {
               <p className="text-gray-600 mt-1">Pantau status pengajuan surat</p>
             </div>
           </div>
-          {/* Hanya tampilkan StatusStats jika ada data dan tidak loading */}
-          {!loading && safeAllStatuses.length > 0 && (
-            <StatusStats allStatuses={safeAllStatuses} />
-          )}
+           {!loading && !allStatuses.length === 0 && <StatusStats allStatuses={allStatuses} />}
         </div>
       </div>
       <div className="max-w-4xl mx-auto px-4 py-8">
         {loading ? (
           <LoadingState />
-        ) : safeAllStatuses.length === 0 ? (
-          <NoDataState type={"Pengajuan Surat"} url={"/letter"} />
+        ) : allStatuses.length === 0 ? (
+          <NoDataState type={"Pengajuan Surat"} url={"/letter"}/>
         ) : (
           <>
             <FilterBar

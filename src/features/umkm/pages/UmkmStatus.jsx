@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react"
 import { useAuth } from "../../../context/AuthContext"
 import { Bell } from "lucide-react"
@@ -22,10 +23,7 @@ export default function UmkmStatusList() {
   const [currentPage, setCurrentPage] = useState(1)
 
   const { allStatuses, categories, error, loading, refetch } = useUmkmStatus(token)
-  
-  // Pastikan allStatuses selalu array untuk menghindari error
-  const safeAllStatuses = allStatuses || []
-  const filteredStatuses = useFiltering(safeAllStatuses, statusFilter, categoryFilter)
+  const filteredStatuses = useFiltering(allStatuses, statusFilter, categoryFilter)
   const { currentPageStatuses, totalPages } = usePagination(filteredStatuses, currentPage)
 
   useEffect(() => {
@@ -60,18 +58,15 @@ export default function UmkmStatusList() {
             </p>
           </div>
         </div>
-        {/* Hanya tampilkan StatusStats jika ada data dan tidak loading */}
-        {!loading && safeAllStatuses.length > 0 && (
-          <StatusStats allStatuses={safeAllStatuses} />
-        )}
+        {!loading && allStatuses.length === 0 && <StatusStats allStatuses={allStatuses} />}
       </div>
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-2 sm:px-4 py-4 sm:py-8">
         {loading ? (
           <LoadingState />
-        ) : safeAllStatuses.length === 0 ? (
-          <NoDataState type="Pengajuan promosi UMKM" url="/umkm-form" />
+        ) : allStatuses.length === 0 ? (
+          <NoDataState type="pengajuan UMKM" url="/umkm-form" />
         ) : (
           <>
             <FilterBar

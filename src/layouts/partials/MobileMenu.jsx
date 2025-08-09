@@ -219,7 +219,7 @@ export default function MobileMenu({ user, totalNotif, notifCount, onClose, onLo
         {user && (
           <>
             {/* Profile Settings */}
-            <Link
+            {/* <Link
               to="/profile"
               onClick={onClose}
               className="flex items-center gap-3 w-full px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition-all duration-200 group mb-2"
@@ -228,7 +228,7 @@ export default function MobileMenu({ user, totalNotif, notifCount, onClose, onLo
                 <Settings className="w-4 h-4" />
               </div>
               <span className="font-medium">Pengaturan Akun</span>
-            </Link>
+            </Link> */}
 
             {/* Logout */}
             <button

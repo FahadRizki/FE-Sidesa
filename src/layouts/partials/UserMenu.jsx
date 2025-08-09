@@ -163,7 +163,7 @@ export default function UserMenu({ user, notifCount, totalNotif, onLogout }) {
             <div className="my-2 border-t border-slate-200" />
 
             {/* Profile Settings */}
-            <Link
+            {/* <Link
               to="/profile"
               className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-slate-50 transition-all duration-200 group"
               onClick={() => setOpen(false)}
@@ -174,7 +174,7 @@ export default function UserMenu({ user, notifCount, totalNotif, onLogout }) {
               <span className="font-medium text-slate-900 group-hover:text-slate-700">
                 Pengaturan Akun
               </span>
-            </Link>
+            </Link> */}
 
             {/* Logout */}
             <button
