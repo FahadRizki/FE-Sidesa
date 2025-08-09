@@ -267,7 +267,7 @@ export default function NewsList() {
                 >
                   <div className="relative overflow-hidden">
                     <img
-                      src={`${BASE_URL}/storage/content_images/${item.image}`}
+                      src={`${BASE_URL}/public/storage/content_images/${item.image}`}
                       alt={item.title}
                       className="h-48 w-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"

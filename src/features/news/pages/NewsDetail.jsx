@@ -63,7 +63,7 @@ export default function NewsDetail() {
 
           {news.image && (
             <img
-              src={`${BASE_URL}/storage/content_images/${news.image}`}
+              src={`${BASE_URL}/public/storage/content_images/${news.image}`}
               alt={news.title}
               className="w-full h-80 object-cover rounded mb-6"
               loading="lazy"
