@@ -41,7 +41,7 @@ const ComplaintStatusList = () => {
         {loading ? (
           <LoadingState />
         ) : complaints.length === 0 ? (
-          <NoDataState  type={"aduan"}/>
+          <NoDataState  type={"Aduan"} url={"/complaint-form"}/>
         ) : (
           <>
             <FilterBar

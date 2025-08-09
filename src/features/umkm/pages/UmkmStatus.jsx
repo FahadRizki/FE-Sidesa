@@ -13,6 +13,7 @@ import { NoDataState, NoFilterResultsState } from "../../../components/status/Em
 // Hooks
 import { useUmkmStatus, useFiltering, usePagination } from "../hooks/useUmkmStatus"
 
+
 export default function UmkmStatusList() {
   const { token } = useAuth()
   
@@ -22,9 +23,10 @@ export default function UmkmStatusList() {
 
   const { allStatuses, categories, error, loading, refetch } = useUmkmStatus(token)
   
-  // Safe filtering dengan default value
-  const filteredStatuses = useFiltering(allStatuses || [], statusFilter, categoryFilter)
-  const { currentPageStatuses, totalPages } = usePagination(filteredStatuses || [], currentPage)
+  // Pastikan allStatuses selalu array untuk menghindari error
+  const safeAllStatuses = allStatuses || []
+  const filteredStatuses = useFiltering(safeAllStatuses, statusFilter, categoryFilter)
+  const { currentPageStatuses, totalPages } = usePagination(filteredStatuses, currentPage)
 
   useEffect(() => {
     setCurrentPage(1)
@@ -36,10 +38,6 @@ export default function UmkmStatusList() {
       window.scrollTo({ top: 0, behavior: "smooth" })
     }
   }
-
-  // Safe check untuk allStatuses
-  const hasData = allStatuses && Array.isArray(allStatuses) && allStatuses.length > 0
-  const hasFilteredData = filteredStatuses && Array.isArray(filteredStatuses) && filteredStatuses.length > 0
 
   if (error) {
     return <ErrorState error={error} onRetry={refetch} />
@@ -62,17 +60,18 @@ export default function UmkmStatusList() {
             </p>
           </div>
         </div>
-        
-        {/* Safe rendering untuk StatusStats */}
-        {!loading && hasData && <StatusStats allStatuses={allStatuses} />}
+        {/* Hanya tampilkan StatusStats jika ada data dan tidak loading */}
+        {!loading && safeAllStatuses.length > 0 && (
+          <StatusStats allStatuses={safeAllStatuses} />
+        )}
       </div>
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-2 sm:px-4 py-4 sm:py-8">
         {loading ? (
           <LoadingState />
-        ) : !hasData ? (
-          <NoDataState type="pengajuan UMKM" />
+        ) : safeAllStatuses.length === 0 ? (
+          <NoDataState type="Pengajuan promosi UMKM" url="/umkm-form" />
         ) : (
           <>
             <FilterBar
@@ -80,10 +79,10 @@ export default function UmkmStatusList() {
               setStatusFilter={setStatusFilter}
               categoryFilter={categoryFilter}
               setCategoryFilter={setCategoryFilter}
-              categories={categories || []}
+              categories={categories}
             />
 
-            {!hasFilteredData ? (
+            {filteredStatuses.length === 0 ? (
               <NoFilterResultsState />
             ) : (
               <>
@@ -97,7 +96,7 @@ export default function UmkmStatusList() {
 
                 {/* Card list */}
                 <div className="grid gap-4 sm:gap-6">
-                  {(currentPageStatuses || []).map((item) => (
+                  {currentPageStatuses.map((item) => (
                     <StatusCard key={item.id} data={item} />
                   ))}
                 </div>

@@ -1,6 +1,7 @@
 import { Frown, TrendingUp, Search, Sparkles } from "lucide-react"
+import { Link } from "react-router-dom"
 
-export function NoDataState({ type }) {
+export function NoDataState({ type, url }) {
   return (
     <div className="text-center py-16">
       <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -11,10 +12,10 @@ export function NoDataState({ type }) {
         {`Nampaknya, Belum ada ${type} untuk saat ini.`}
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+        <Link to={url} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
           <Sparkles className="w-5 h-5 inline mr-2" />
           {`Daftar atau ajukan ${type}`}
-        </button>
+        </Link>
         <button className="bg-white hover:bg-gray-50 text-gray-700 font-semibold px-8 py-4 rounded-2xl border-2 border-gray-200 hover:border-gray-300 transition-all duration-300">
           <TrendingUp className="w-5 h-5 inline mr-2" />
           Pelajari Lebih Lanjut

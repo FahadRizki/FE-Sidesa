@@ -196,8 +196,18 @@ export default function NavbarUser() {
         }`}>
           <MobileMenu 
             user={user} 
-            totalNotif={totalNotif} 
+            totalNotif={totalNotif}
+            notifCount={notifCount}
             onClose={() => setMenuOpen(false)}
+            onLogout={() => {
+              logout();
+              setMenuOpen(false);
+              toast.success("Berhasil logout!", {
+                className: "!bg-slate-800 !text-white border border-slate-600",
+                progressClassName: "!bg-blue-500",
+              });
+              setTimeout(() => navigate("/login"), 1000);
+            }}
           />
         </div>
       </div>
