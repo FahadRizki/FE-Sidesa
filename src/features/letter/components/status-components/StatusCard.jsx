@@ -10,7 +10,7 @@ import {
   Download,
   Loader2 // Tambahkan import ini
 } from "lucide-react"
-
+import { Link } from "react-router-dom"
 export default function StatusCard({ data, downloadingId, onDownload }) {
   const status = data?.status?.toLowerCase() || "pending"
   console.log("Status data:", status, data) // Debug log

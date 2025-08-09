@@ -14,9 +14,6 @@ import { NoDataState, NoFilterResultsState } from "../../../components/status/Em
 // Hooks
 import { useUmkmStatus, useFiltering, usePagination } from "../hooks/useUmkmStatus"
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
 
 export default function UmkmStatusList() {
   const { token } = useAuth()
