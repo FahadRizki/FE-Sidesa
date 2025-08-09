@@ -3,7 +3,7 @@ import { formatDate } from "../../../utils/dateUlits";
 import StatusHeader from "../components/Header";
 
 const ComplaintCard = ({ complaint }) => {
-  const isRejected = complaint.status?.toLowerCase() === "Ditolak";
+  const isRejected = complaint.status?.toLowerCase() === "ditolak";
 
   return (
     <div className="group bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-gray-200 overflow-hidden">
