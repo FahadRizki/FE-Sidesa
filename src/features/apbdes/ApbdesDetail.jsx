@@ -212,7 +212,7 @@ export default function ApbdesDetail() {
           <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm rounded-xl p-1 border border-gray-200/50 shadow-lg">
             {[
               { id: "bar", label: "Bar Chart", icon: BarChart3 },
-              { id: "pie", label: "Pie Chart", icon: PieChart },
+              { id: "pie", label: "Pie Chart", icon: PieChartIcon },
             ].map((chart) => (
               <button
                 key={chart.id}
