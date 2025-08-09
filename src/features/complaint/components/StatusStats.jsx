@@ -1,11 +1,40 @@
+const normalizeStatus = (status) => {
+  if (!status) return '';
+  return status.toString().toLowerCase().trim();
+}
 
-const getStatusCounts = (complaints) => ({
-  total: complaints.length,
-  completed: complaints.filter((s) => s.status?.toLowerCase() === "disetujui").length,
-  pending: complaints.filter((s) => s.status?.toLowerCase() === "pending").length,
-  review: complaints.filter((s) =>  s.status?.toLowerCase() === "ditinjau").length,
-  rejected: complaints.filter((s) => s.status?.toLowerCase() === "ditolak").length,
-})
+const getStatusCounts = (complaints) => {
+  const statusCounts = {
+    total: complaints.length,
+    completed: 0,
+    pending: 0,
+    review: 0,
+    rejected: 0,
+  }
+  
+  complaints.forEach((complaint) => {
+    const status = normalizeStatus(complaint.status);
+    
+    switch (status) {
+      case 'disetujui':
+        statusCounts.completed++;
+        break;
+      case 'pending':
+        statusCounts.pending++;
+        break;
+      case 'ditinjau':
+        statusCounts.review++;
+        break;
+      case 'ditolak':
+        statusCounts.rejected++;
+        break;
+      default:
+        console.warn(`Unknown status: "${complaint.status}" for complaint ID: ${complaint.id}`);
+    }
+  });
+  
+  return statusCounts;
+}
 
 const STAT_ITEMS = [
   { key: "total", label: "Total Pengajuan", color: "text-blue-600", bg: "bg-blue-50" },
@@ -13,11 +42,19 @@ const STAT_ITEMS = [
   { key: "review", label: "Ditinjau", color: "text-blue-600", bg: "bg-blue-50" },
   { key: "pending", label: "Menunggu", color: "text-orange-600", bg: "bg-orange-50" },
   { key: "rejected", label: "Ditolak", color: "text-red-600", bg: "bg-red-50" },
-  
 ]
 
 export default function StatusStats({ complaints }) {
   const stats = getStatusCounts(complaints)
+  
+  // Debug: Log untuk melihat status yang sebenarnya
+  console.log('Complaint statuses:', complaints.map(c => ({
+    id: c.id,
+    status: c.status,
+    statusLower: c.status?.toLowerCase().trim()
+  })))
+  
+  console.log('Status counts:', stats)
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
