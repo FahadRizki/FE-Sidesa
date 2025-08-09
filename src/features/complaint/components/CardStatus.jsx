@@ -39,10 +39,10 @@ const ComplaintCard = ({ complaint }) => {
             )}
 
             <div className="flex gap-3">
-              <button className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 py-2 rounded-xl transition-all">
+              {/* <button className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 py-2 rounded-xl transition-all">
                 <MessageSquare className="w-4 h-4" />
                 Lihat Detail
-              </button>
+              </button> */}
               
               {isRejected && (
                 <Link to={`/complaint-form`} className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-xl transition-all">

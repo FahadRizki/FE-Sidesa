@@ -80,10 +80,10 @@ export default function StatusCard({ data }) {
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-              <button className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 px-3 sm:px-4 py-2 rounded-xl transition-all">
+              {/* <button className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 px-3 sm:px-4 py-2 rounded-xl transition-all">
                 <FileText className="w-4 h-4" />
                 Lihat Detail
-              </button>
+              </button> */}
               {status === "rejected" && (
                 <Link to={`/umkm-form`} className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 sm:px-4 py-2 rounded-xl transition-all">
                   <RefreshCw className="w-4 h-4" />
