@@ -92,8 +92,8 @@ export default function LetterStatusList() {
               <Bell className="w-8 h-8 text-blue-600" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Status Pengajuan UMKM</h1>
-              <p className="text-gray-600 mt-1">Pantau status pengajuan UMKM</p>
+              <h1 className="text-3xl font-bold text-gray-900">Status Pengajuan Surat</h1>
+              <p className="text-gray-600 mt-1">Pantau status pengajuan surat</p>
             </div>
           </div>
           <StatusStats statuses={allStatuses} />
