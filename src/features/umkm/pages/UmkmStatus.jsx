@@ -1,3 +1,23 @@
+
+import { useState, useEffect } from "react"
+import { useAuth } from "../../../context/AuthContext"
+import { Bell } from "lucide-react"
+// Components
+import StatusStats from "../components/StatusStats"
+import StatusCard from "../components/StatusCard"
+import LoadingState from "../../../components/status/LoadingState"
+import FilterBar from "../components/FilterBar"
+import Pagination from "../../../components/status/Pagination"
+import ErrorState from "../../../components/status/ErrorStats"
+import { NoDataState, NoFilterResultsState } from "../../../components/status/EmptyState"
+
+// Hooks
+import { useUmkmStatus, useFiltering, usePagination } from "../hooks/useUmkmStatus"
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 export default function UmkmStatusList() {
   const { token } = useAuth()
   
