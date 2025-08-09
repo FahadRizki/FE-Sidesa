@@ -1,21 +1,168 @@
 // layouts/partials/MobileMenu.jsx
 import { Link } from "react-router-dom";
+import { 
+  User, 
+  Newspaper, 
+  Store, 
+  MessageSquare, 
+  FileText, 
+  MessageCircle,
+  Home,
+  Bell,
+  X
+} from "lucide-react";
 
 export default function MobileMenu({ user, totalNotif, onClose }) {
+  const menuItems = [
+    { to: "/", label: "Beranda", icon: Home, public: true },
+    { to: "/profile-desa", label: "Profil Desa", icon: User, public: true },
+    { to: "/news", label: "Berita", icon: Newspaper, public: true },
+    { to: "/umkm", label: "UMKM", icon: Store, public: true },
+  ];
+
+  const userMenuItems = [
+    { to: "/complaint-form", label: "Aduan", icon: MessageSquare },
+    { to: "/letter", label: "Surat", icon: FileText },
+    { to: "/feedback", label: "Kritik & Saran", icon: MessageCircle },
+  ];
+
   return (
-    <div className="md:hidden bg-slate-950 text-white px-4 pb-4">
-      <ul className="flex flex-col gap-2 text-sm">
-        <li><Link to="/profile-desa" onClick={onClose}>Profile</Link></li>
-        <li><Link to="/news" onClick={onClose}>Berita</Link></li>
-        <li><Link to="/umkm" onClick={onClose}>UMKM</Link></li>
+    <div className="h-full flex flex-col bg-slate-900/95 backdrop-blur-md">
+      {/* Header */}
+      <div className="flex items-center justify-between p-6 border-b border-slate-700/50">
+        <div className="flex items-center gap-3">
+          {user ? (
+            <>
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                <User className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="text-white font-semibold text-sm truncate max-w-[150px]">
+                  {user.name}
+                </p>
+                <p className="text-slate-400 text-xs">
+                  {user.email}
+                </p>
+              </div>
+            </>
+          ) : (
+            <div>
+              <p className="text-white font-semibold">Menu</p>
+              <p className="text-slate-400 text-xs">Portal Digital Desa</p>
+            </div>
+          )}
+          
+          {/* Notification Badge */}
+          {totalNotif > 0 && (
+            <div className="ml-auto flex items-center gap-1 bg-red-500/20 px-2 py-1 rounded-full border border-red-500/30">
+              <Bell className="w-3 h-3 text-red-400" />
+              <span className="text-red-400 text-xs font-medium">
+                {totalNotif > 99 ? '99+' : totalNotif}
+              </span>
+            </div>
+          )}
+        </div>
+        
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors duration-200"
+          aria-label="Close menu"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Menu Content */}
+      <div className="flex-1 overflow-y-auto p-6">
+        {/* Public Menu Items */}
+        <nav className="space-y-2">
+          <p className="text-slate-400 text-xs uppercase tracking-wider font-medium mb-4">
+            Menu Utama
+          </p>
+          
+          {menuItems.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={index}
+                to={item.to}
+                onClick={onClose}
+                className="flex items-center gap-3 px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition-all duration-200 group"
+              >
+                <div className="p-2 bg-slate-800/50 rounded-lg group-hover:bg-slate-700 transition-colors duration-200">
+                  <Icon className="w-4 h-4" />
+                </div>
+                <span className="font-medium">{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* User Menu Items */}
         {user && (
-          <>
-            <li><Link to="/complaint-form" onClick={onClose}>Aduan</Link></li>
-            <li><Link to="/letter" onClick={onClose}>Surat</Link></li>
-            <li><Link to="/feedback" onClick={onClose}>Kritik & Saran</Link></li>
-          </>
+          <nav className="space-y-2 mt-8">
+            <p className="text-slate-400 text-xs uppercase tracking-wider font-medium mb-4">
+              Layanan Pengguna
+            </p>
+            
+            {userMenuItems.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={index}
+                  to={item.to}
+                  onClick={onClose}
+                  className="flex items-center gap-3 px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition-all duration-200 group"
+                >
+                  <div className="p-2 bg-slate-800/50 rounded-lg group-hover:bg-slate-700 transition-colors duration-200">
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="font-medium">{item.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
         )}
-      </ul>
+
+        {/* Auth Section */}
+        {!user && (
+          <div className="mt-8 space-y-3">
+            <p className="text-slate-400 text-xs uppercase tracking-wider font-medium mb-4">
+              Akun
+            </p>
+            
+            <Link
+              to="/login"
+              onClick={onClose}
+              className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-4 py-3 rounded-xl font-semibold transition-all duration-200 transform hover:scale-[0.98] shadow-lg"
+            >
+              <User className="w-4 h-4" />
+              Masuk
+            </Link>
+            
+            <Link
+              to="/register"
+              onClick={onClose}
+              className="flex items-center justify-center gap-2 w-full border border-slate-600 hover:bg-slate-800 text-slate-300 hover:text-white px-4 py-3 rounded-xl font-semibold transition-all duration-200"
+            >
+              Daftar
+            </Link>
+          </div>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div className="p-6 border-t border-slate-700/50">
+        <div className="pt-4">
+          <p className="text-slate-500 text-xs text-center">
+            © 2024 Desa Batununggal
+          </p>
+          <p className="text-slate-500 text-xs text-center mt-1">
+            Portal Digital Desa
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

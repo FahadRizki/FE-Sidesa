@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react"
 import { useAuth } from "../../../context/AuthContext"
 import { Bell } from "lucide-react"
@@ -14,7 +13,6 @@ import { NoDataState, NoFilterResultsState } from "../../../components/status/Em
 // Hooks
 import { useUmkmStatus, useFiltering, usePagination } from "../hooks/useUmkmStatus"
 
-
 export default function UmkmStatusList() {
   const { token } = useAuth()
   
@@ -23,8 +21,10 @@ export default function UmkmStatusList() {
   const [currentPage, setCurrentPage] = useState(1)
 
   const { allStatuses, categories, error, loading, refetch } = useUmkmStatus(token)
-  const filteredStatuses = useFiltering(allStatuses, statusFilter, categoryFilter)
-  const { currentPageStatuses, totalPages } = usePagination(filteredStatuses, currentPage)
+  
+  // Safe filtering dengan default value
+  const filteredStatuses = useFiltering(allStatuses || [], statusFilter, categoryFilter)
+  const { currentPageStatuses, totalPages } = usePagination(filteredStatuses || [], currentPage)
 
   useEffect(() => {
     setCurrentPage(1)
@@ -36,6 +36,10 @@ export default function UmkmStatusList() {
       window.scrollTo({ top: 0, behavior: "smooth" })
     }
   }
+
+  // Safe check untuk allStatuses
+  const hasData = allStatuses && Array.isArray(allStatuses) && allStatuses.length > 0
+  const hasFilteredData = filteredStatuses && Array.isArray(filteredStatuses) && filteredStatuses.length > 0
 
   if (error) {
     return <ErrorState error={error} onRetry={refetch} />
@@ -58,14 +62,16 @@ export default function UmkmStatusList() {
             </p>
           </div>
         </div>
-        {!loading && allStatuses.length > 0 && <StatusStats allStatuses={allStatuses} />}
+        
+        {/* Safe rendering untuk StatusStats */}
+        {!loading && hasData && <StatusStats allStatuses={allStatuses} />}
       </div>
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-2 sm:px-4 py-4 sm:py-8">
         {loading ? (
           <LoadingState />
-        ) : allStatuses.length === 0 ? (
+        ) : !hasData ? (
           <NoDataState type="pengajuan UMKM" />
         ) : (
           <>
@@ -74,10 +80,10 @@ export default function UmkmStatusList() {
               setStatusFilter={setStatusFilter}
               categoryFilter={categoryFilter}
               setCategoryFilter={setCategoryFilter}
-              categories={categories}
+              categories={categories || []}
             />
 
-            {filteredStatuses.length === 0 ? (
+            {!hasFilteredData ? (
               <NoFilterResultsState />
             ) : (
               <>
@@ -91,7 +97,7 @@ export default function UmkmStatusList() {
 
                 {/* Card list */}
                 <div className="grid gap-4 sm:gap-6">
-                  {currentPageStatuses.map((item) => (
+                  {(currentPageStatuses || []).map((item) => (
                     <StatusCard key={item.id} data={item} />
                   ))}
                 </div>

@@ -31,9 +31,9 @@ export default function LetterStatusList() {
   // Data fetching
   const { allStatuses, letterTypes, error, loading, refetch } = useLetterStatus(token)
   
-  // Filtering and pagination
-  const filteredStatuses = useFiltering(allStatuses, statusFilter, typeFilter)
-  const { currentPageStatuses, totalPages } = usePagination(filteredStatuses, currentPage)
+  // Safe filtering and pagination dengan default values
+  const filteredStatuses = useFiltering(allStatuses || [], statusFilter, typeFilter)
+  const { currentPageStatuses, totalPages } = usePagination(filteredStatuses || [], currentPage)
   
   // Reset page when filters change
   useEffect(() => {
@@ -78,6 +78,9 @@ export default function LetterStatusList() {
     }
   };
 
+  // Safe checks untuk data
+  const hasData = allStatuses && Array.isArray(allStatuses) && allStatuses.length > 0
+  const hasFilteredData = filteredStatuses && Array.isArray(filteredStatuses) && filteredStatuses.length > 0
   
   if (error) {
     return <ErrorState error={error} onRetry={refetch} />
@@ -96,13 +99,16 @@ export default function LetterStatusList() {
               <p className="text-gray-600 mt-1">Pantau status pengajuan surat</p>
             </div>
           </div>
-           {!loading && allStatuses.length > 0 && <StatusStats allStatuses={allStatuses} />}
+          
+          {/* Safe rendering untuk StatusStats */}
+          {!loading && hasData && <StatusStats allStatuses={allStatuses} />}
         </div>
       </div>
+      
       <div className="max-w-4xl mx-auto px-4 py-8">
         {loading ? (
           <LoadingState />
-        ) : allStatuses.length === 0 ? (
+        ) : !hasData ? (
           <NoDataState />
         ) : (
           <>
@@ -111,21 +117,21 @@ export default function LetterStatusList() {
               setStatusFilter={setStatusFilter}
               typeFilter={typeFilter}
               setTypeFilter={setTypeFilter}
-              letterTypes={letterTypes}
+              letterTypes={letterTypes || []}
             />
             
-            {filteredStatuses.length === 0 ? (
+            {!hasFilteredData ? (
               <NoFilterResultsState />
             ) : (
               <>
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-sm text-gray-600">
-                    Menampilkan {((currentPage - 1) * 5) + 1}-{Math.min(currentPage * 5, filteredStatuses.length)} dari {filteredStatuses.length} pengajuan
+                    Menampilkan {((currentPage - 1) * 5) + 1}-{Math.min(currentPage * 5, (filteredStatuses || []).length)} dari {(filteredStatuses || []).length} pengajuan
                   </p>
                 </div>
                 
                 <div className="space-y-6">
-                  {currentPageStatuses.map((item) => (
+                  {(currentPageStatuses || []).map((item) => (
                     <StatusCard 
                       key={item.id} 
                       data={item} 
