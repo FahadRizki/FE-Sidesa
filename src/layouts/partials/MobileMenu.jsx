@@ -10,8 +10,8 @@ import {
   Home,
   Bell,
   X,
-  Settings,
-  LogOut
+  LogOut,
+  DollarSign
 } from "lucide-react";
 
 const Badge = ({ count, className = "" }) =>
@@ -27,6 +27,7 @@ export default function MobileMenu({ user, totalNotif, notifCount, onClose, onLo
     { to: "/profile-desa", label: "Profil Desa", icon: User, public: true },
     { to: "/news", label: "Berita", icon: Newspaper, public: true },
     { to: "/umkm", label: "UMKM", icon: Store, public: true },
+    { to: "/apbdes", label: "APBDes", icon: DollarSign, public: true },
   ];
 
   const userMenuItems = [
