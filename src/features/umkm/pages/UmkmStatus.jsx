@@ -45,7 +45,7 @@ export default function UmkmStatusList() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-300 via-indigo-100 to-purple-300 p-4 sm:p-8 lg:p-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-300 via-indigo-100 to-purple-300 p-4 sm:p-8 py-20">
       {/* Header */}
       <div className="max-w-4xl mx-auto px-2 sm:px-4 py-4 sm:py-8">
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
@@ -61,8 +61,7 @@ export default function UmkmStatusList() {
             </p>
           </div>
         </div>
-
-        <StatusStats statuses={allStatuses} />
+        {!loading && complaints.length > 0 && <StatusStats allStatuses={allStatuses} />}
       </div>
 
       {/* Content */}

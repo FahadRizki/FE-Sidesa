@@ -1,7 +1,7 @@
-import { Calendar, MessageSquare, RefreshCw } from "lucide-react";
+import { Calendar, Link, MessageSquare, RefreshCw } from "lucide-react";
 import { formatDate } from "../../../utils/dateUlits";
 import StatusHeader from "../components/Header";
-
+import { Link } from "react-router-dom";
 const ComplaintCard = ({ complaint }) => {
   const isRejected = complaint.status?.toLowerCase() === "ditolak";
 
@@ -45,10 +45,10 @@ const ComplaintCard = ({ complaint }) => {
               </button>
               
               {isRejected && (
-                <button className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-xl transition-all">
+                <Link to={`/complaint-form`} className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-xl transition-all">
                   <RefreshCw className="w-4 h-4" />
                   Ajukan Ulang
-                </button>
+                </Link>
               )}
             </div>
           </div>

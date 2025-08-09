@@ -96,7 +96,7 @@ export default function LetterStatusList() {
               <p className="text-gray-600 mt-1">Pantau status pengajuan surat</p>
             </div>
           </div>
-          <StatusStats statuses={allStatuses} />
+           {!loading && complaints.length > 0 && <StatusStats allStatuses={allStatuses} />}
         </div>
       </div>
       <div className="max-w-4xl mx-auto px-4 py-8">

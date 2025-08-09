@@ -7,6 +7,7 @@ import {
 } from "lucide-react"
 import { STATUS_CONFIG } from "../../../config/statusConfig"
 import { formatDate } from "../../../utils/dateUlits"
+import { Link } from "react-router-dom"
 
 export default function StatusCard({ data }) {
   const status = data?.status?.toLowerCase() || "pending"
@@ -84,10 +85,10 @@ export default function StatusCard({ data }) {
                 Lihat Detail
               </button>
               {status === "rejected" && (
-                <button className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 sm:px-4 py-2 rounded-xl transition-all">
+                <Link to={`/umkm-form`} className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 sm:px-4 py-2 rounded-xl transition-all">
                   <RefreshCw className="w-4 h-4" />
                   Ajukan Ulang
-                </button>
+                </Link>
               )}
             </div>
           </div>

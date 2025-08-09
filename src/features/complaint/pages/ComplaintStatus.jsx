@@ -56,7 +56,7 @@ const ComplaintStatusList = () => {
               <>
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-sm text-gray-600">
-                    Menampilkan {paginatedItems.length} dari {filteredComplaints.length} aduan                  </p>
+                    Menampilkan {paginatedItems.length} dari {filteredComplaints.length} aduan</p>
                 </div>
 
                 <div className="space-y-6">

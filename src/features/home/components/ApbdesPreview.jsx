@@ -261,13 +261,13 @@ export default function ApbdesPreview() {
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                       </span>
                     </Link>
-
+{/* 
                     <button className="group px-6 py-4 bg-white/70 backdrop-blur-sm hover:bg-white/90 text-gray-700 hover:text-gray-900 font-semibold rounded-2xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
                       <span className="flex items-center justify-center gap-2">
                         <PieChart className="w-5 h-5" />
                         Unduh Laporan
                       </span>
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
