@@ -158,7 +158,7 @@ export default function NewsList() {
                   {/* Gambar Banner */}
                   <div className="aspect-[16/9] sm:aspect-[16/7] md:aspect-[21/9] overflow-hidden">
                     <img
-                      src={`${BASE_URL}/storage/content_images/${bannerNews.image}`}
+                      src={`${BASE_URL}/public/storage/content_images/${bannerNews.image}`}
                       alt={bannerNews.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
