@@ -58,7 +58,7 @@ export default function UmkmStatusList() {
             </p>
           </div>
         </div>
-        {!loading && allStatuses.length === 0 && <StatusStats allStatuses={allStatuses} />}
+        {!loading && !allStatuses.length === 0 && <StatusStats allStatuses={allStatuses} />}
       </div>
 
       {/* Content */}
