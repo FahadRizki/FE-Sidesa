@@ -37,7 +37,9 @@ const Footer = () => {
             <Link to="/" className="hover:underline">Beranda</Link>
             <Link to="/umkm" className="hover:underline">UMKM</Link>
             <Link to="/apbdes" className="hover:underline">APBDes</Link>
-            <Link to="/layanan" className="hover:underline">Layanan Surat</Link>
+            <Link to="/news" className="hover:underline">Berita</Link>
+            <Link to="/profile-desa" className="hover:underline">Profil Desa</Link>
+            {/* <Link to="/layanan" className="hover:underline">Layanan Surat</Link> */}
           </div>
 
           {/* Kontak */}

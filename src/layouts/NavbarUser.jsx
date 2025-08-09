@@ -223,7 +223,7 @@ export default function NavbarUser() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"
+        theme="light"
         className="!mt-20"
         toastClassName="!bg-slate-800 !text-white !border !border-slate-600 !shadow-2xl"
         progressClassName="!bg-gradient-to-r !from-blue-500 !to-purple-500"

@@ -8,8 +8,6 @@ import {
   MessageSquare, 
   LogOut, 
   ChevronDown,
-  Settings,
-  User
 } from "lucide-react";
 
 const Badge = ({ count, className = "" }) =>
